@@ -17,11 +17,12 @@ import java.util.List;
 @Service
 public class StudentService {
 
+    @Autowired
     private StudentRepository studentRepository;
 
     private Student student;
 
-    public String save(Student student,HttpServletResponse response) throws JsonProcessingException, JSONException {
+    public String save(Student student, HttpServletResponse response) throws JsonProcessingException, JSONException {
         JSONObject responseJson = new JSONObject();
         ObjectMapper mapper = new ObjectMapper();
         mapper.findAndRegisterModules();

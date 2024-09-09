@@ -5,6 +5,7 @@ import com.example.demo.model.Student;
 import com.example.demo.service.StudentService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.bson.types.ObjectId;
 import org.json.JSONException;
@@ -20,12 +21,13 @@ import java.util.logging.Logger;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
+@AllArgsConstructor
 public class StudentController {
 
-    private Logger logger = (Logger) LoggerFactory.getLogger(StudentController.class);
+    //private static Logger logger = (Logger) LoggerFactory.getLogger(StudentController.class);
 
     @Autowired
-    private  StudentService studentService;
+    private final StudentService studentService;
 
     @SneakyThrows
     @PostMapping(path="/add")
