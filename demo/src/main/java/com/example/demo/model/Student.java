@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,9 +14,9 @@ import java.time.Period;
 @Document(collection= "student")
 public class Student {
 
-    public Student(){
-    }
-    private Object id;
+    @Id
+    private String id;
+
     private String name;
     private LocalDate dob;
 
@@ -24,6 +25,13 @@ public class Student {
 
     public int getAge() {
         return Period.between(this.dob, LocalDate.now()).getYears();
+    }
+
+    public Student(String id, String name, LocalDate dob){
+        super();
+        this.id = id;
+        this.name = name;
+        this.dob = dob;
     }
 
 }
