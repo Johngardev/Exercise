@@ -5,9 +5,9 @@ import com.example.demo.repository.StudentRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
-import net.minidev.json.JSONObject;
 import org.bson.types.ObjectId;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +20,6 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    private Student student;
-
     public String save(Student student, HttpServletResponse response) throws JsonProcessingException, JSONException {
         JSONObject responseJson = new JSONObject();
         ObjectMapper mapper = new ObjectMapper();
@@ -31,7 +29,7 @@ public class StudentService {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
         student = studentRepository.save(student);
-        JSONObject studentJSON = new JSONObject(Integer.parseInt(mapper.writeValueAsString(student)));
+        JSONObject studentJSON = new JSONObject(mapper.writeValueAsString(student));
         studentJSON.put("id", student.getId().toString());
         responseJson.put("saveStudentResponse", studentJSON);
 
@@ -61,7 +59,7 @@ public class StudentService {
             employee1.setAge(student.getAge());
             studentRepository.save(employee1);
 
-            JSONObject studentJSON = new JSONObject(Integer.parseInt(mapper.writeValueAsString(employee1)));
+            JSONObject studentJSON = new JSONObject(mapper.writeValueAsString(employee1));
             studentJSON.put("id", employee1.getId().toString());
             responseJson.put("getUpdateStudentResponse", studentJSON);
         }

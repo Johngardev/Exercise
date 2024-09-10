@@ -1,7 +1,12 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,13 +16,17 @@ import java.time.Period;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Document(collection= "student")
 public class Student {
 
     @Id
-    private String id;
+    private ObjectId id;
 
+    @JsonProperty("name")
     private String name;
+
+    @JsonProperty("dob")
     private LocalDate dob;
 
     @Transient
@@ -27,7 +36,7 @@ public class Student {
         return Period.between(this.dob, LocalDate.now()).getYears();
     }
 
-    public Student(String id, String name, LocalDate dob){
+    public Student(ObjectId id, String name, LocalDate dob){
         super();
         this.id = id;
         this.name = name;

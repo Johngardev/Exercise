@@ -12,7 +12,6 @@ import java.util.UUID;
 @Repository
 public interface StudentRepository  extends MongoRepository<Student,UUID> {
 
-    @Query("{name: '?0'}")
     List<Student> findByName(String name);
 
     Student deleteById(ObjectId id);
