@@ -29,6 +29,12 @@ public class Student {
     @JsonProperty("dob")
     private LocalDate dob;
 
+    @JsonProperty("email")
+    private String email;
+
+    @JsonProperty("password")
+    private String password;
+
     @Transient
     private int age;
 
@@ -36,11 +42,13 @@ public class Student {
         return Period.between(this.dob, LocalDate.now()).getYears();
     }
 
-    public Student(ObjectId id, String name, LocalDate dob){
+    public Student(ObjectId id, String name, LocalDate dob, String email, String password){
         super();
         this.id = id;
         this.name = name;
         this.dob = dob;
+        this.email = email;
+        this.password = password;
     }
 
 }
