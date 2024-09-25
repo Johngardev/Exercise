@@ -17,4 +17,8 @@ public class RefreshToken {
         this.id = id;
         this.owner = owner;
     }
+
+    public RefreshToken(){
+
+    }
 }
