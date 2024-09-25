@@ -9,13 +9,15 @@ import org.bson.types.ObjectId;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class StudentService {
+public class StudentService implements UserDetailsService {
 
     @Autowired
     private StudentRepository studentRepository;
@@ -48,7 +50,7 @@ public class StudentService {
         mapper.findAndRegisterModules();
         Student employee1 = studentRepository.deleteById(id);
 
-        boolean exists = studentRepository.existsById(id);
+        boolean exists = studentRepository.existsById(String.valueOf(id));
 
         if (!exists) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -71,7 +73,7 @@ public class StudentService {
          ObjectMapper mapper = new ObjectMapper();
          mapper.findAndRegisterModules();
 
-         boolean exists = studentRepository.existsById(id);
+         boolean exists = studentRepository.existsById(String.valueOf(id));
 
          if(!exists){
              response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -80,6 +82,15 @@ public class StudentService {
              studentRepository.deleteById(id);
          }
          return responseJson.toString();
+    }
+
+    @Override
+    public Student loadUserByUsername(String name) throws UsernameNotFoundException {
+        return studentRepository.findByName(name).orElseThrow( () -> new UsernameNotFoundException("Username not found"));
+    }
+
+    public Student findById(String id) {
+        return studentRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("User ID not found"));
     }
 }
 

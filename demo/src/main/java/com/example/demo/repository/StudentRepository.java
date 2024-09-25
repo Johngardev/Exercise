@@ -7,16 +7,17 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface StudentRepository  extends MongoRepository<Student,UUID> {
 
-    List<Student> findByName(String name);
+    Optional<Student> findByName(String name);
 
     Student deleteById(ObjectId id);
 
-    boolean existsById(ObjectId id);
+    boolean existsById(String id);
 
-    Student findById(ObjectId id);
+    Optional<Student> findById(String id);
 }
