@@ -9,6 +9,7 @@ import com.example.demo.repository.RefreshTokenRepository;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.security.JwtHelper;
 import com.example.demo.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -57,7 +58,10 @@ public class AuthREST {
 
     @PostMapping("signup")
     public ResponseEntity<?> signup(@Valid @RequestBody SignupDTO dto) {
-        Student user = new Student(dto.getUsername(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()));
+        Student user = new Student();
+        user.setName(dto.getUsername());
+        user.setEmail(dto.getEmail());
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
         studentRepository.save(user);
 
         RefreshToken refreshToken = new RefreshToken();
