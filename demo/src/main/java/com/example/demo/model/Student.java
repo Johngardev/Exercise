@@ -2,9 +2,7 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -15,8 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 
 @Data
@@ -46,11 +43,6 @@ public class Student implements UserDetails {
     @NonNull
     private String password;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities(){
-        return Collections.EMPTY_LIST;
-    }
-
     @Transient
     private int age;
 
@@ -58,43 +50,41 @@ public class Student implements UserDetails {
         return Period.between(this.dob, LocalDate.now()).getYears();
     }
 
-    public Student(String id, String name, LocalDate dob, String email, String password){
-        super();
-        this.id = id;
+    @DBRef
+    private Set<Role> roles = new HashSet<>();
+
+    public Student(String name, LocalDate dob, String email, String password){
         this.name = name;
         this.dob = dob;
         this.email = email;
         this.password = password;
     }
 
+    public @NonNull String getName() { return name; }
+
+    public void setName(@NonNull String name) { this.name = name; }
+
+
+    public @NonNull String getEmail() { return email; }
+
+    public void setEmail(@NonNull String email) { this.email = email; }
+
     @Override
-    public String getPassword() {
-        return password;
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
     }
+
+    public @NonNull String getPassword() { return password; }
 
     @Override
     public String getUsername() {
         return "";
     }
 
-    @Override
-    public boolean isAccountNonExpired(){
-        return true;
-    }
+    public void setPassword(@NonNull String password) { this.password = password; }
 
-    @Override
-    public boolean isAccountNonLocked(){
-        return true;
-    }
+    public Set<Role> getRoles() { return roles; }
 
-    @Override
-    public boolean isCredentialsNonExpired(){
-        return true;
-    }
-
-    public boolean isEnable(){
-        return true;
-    }
-
+    public void setRoles(Set<Role> roles) { this.roles = roles; }
 
 }
