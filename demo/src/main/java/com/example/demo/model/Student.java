@@ -46,6 +46,9 @@ public class Student implements UserDetails {
     @Transient
     private int age;
 
+    public Student(String username, String email, String encode) {
+    }
+
     public int getAge() {
         return Period.between(this.dob, LocalDate.now()).getYears();
     }
