@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -19,7 +20,7 @@ import java.util.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection= "student")
+@Document(collection= "users")
 public class Student implements UserDetails {
 
     @Id
@@ -35,6 +36,7 @@ public class Student implements UserDetails {
 
     @Indexed(unique = true)
     @JsonProperty("email")
+    @Email
     @NonNull
     private String email;
 
