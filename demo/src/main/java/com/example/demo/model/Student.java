@@ -49,6 +49,9 @@ public class Student implements UserDetails {
     private int age;
 
     public Student(String username, String email, String encode) {
+        this.name = username;
+        this.email = email;
+        this.password = encode;
     }
 
     public int getAge() {
