@@ -16,6 +16,8 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 
+/** User object model that will represent the data that will contain the information for the users that will access the web platform, likewise,
+ *  it will serve to model the users in the database. Contain */
 
 @Data
 @AllArgsConstructor
@@ -31,6 +33,7 @@ public class Student implements UserDetails {
     @NonNull
     private String name;
 
+    /** this variable contain date of the birthday of user*/
     @JsonProperty("dob")
     private LocalDate dob;
 
@@ -54,6 +57,7 @@ public class Student implements UserDetails {
         this.password = encode;
     }
 
+    /** calculate age of user as of date of birthday */
     public int getAge() {
         return Period.between(this.dob, LocalDate.now()).getYears();
     }

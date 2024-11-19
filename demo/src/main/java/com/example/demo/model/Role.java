@@ -3,6 +3,8 @@ package com.example.demo.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/** Defines the type of roles with their respective attributes*/
+
 @Document(collection = "roles")
 public class Role {
 

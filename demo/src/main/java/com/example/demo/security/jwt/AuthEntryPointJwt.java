@@ -12,19 +12,29 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialException;
 import java.io.IOException;
 
-@Component
+/**
+ * Custom implementation of AuthenticationEntryPoint to handle unauthorized access.
+ */
+@Component // Indicate that this class is a Spring component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthEntryPointJwt.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthEntryPointJwt.class); // Logger for logging errors
 
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, SerialException {
-        logger.error("Unauthorized error: {}", authException.getMessage());
-
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
-    }
-
+    /**
+     * Handle unauthorized access attempts.
+     *
+     * @param request The HTTP request.
+     * @param response The HTTP response.
+     * @param authException The exception that was thrown during authentication.
+     * @throws IOException If an input or output exception occurs.
+     * @throws ServletException If a servlet-related exception occurs.
+     */
     @Override
     public void commence(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        // Log the unauthorized access attempt with the exception message
+        logger.error("Unauthorized error: {}", authException.getMessage());
 
+        // Send an HTTP response with a 401 Unauthorized status and an error message
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
     }
 }

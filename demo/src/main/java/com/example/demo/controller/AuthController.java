@@ -32,18 +32,18 @@ import java.util.stream.Collectors;
 public class AuthController {
 
     @Autowired
-    AuthenticationManager authenticationManager;
+    AuthenticationManager authenticationManager; //Handles user authentication
 
     @Autowired
-    StudentRepository studentRepository;
+    StudentRepository studentRepository; // Repository for user-related database operations
 
     @Autowired
-    RoleRepository roleRepository;
+    RoleRepository roleRepository; // Repository for role-related databe operations
 
     @Autowired
-    PasswordEncoder encoder;
+    PasswordEncoder encoder; // Encoder for password hashing
     @Autowired
-    JwtUtils jwtUtils;
+    JwtUtils jwtUtils; // Utility for generating JWT tokens
 
     /**
      * Authenticate user and return a JWT token if successful.

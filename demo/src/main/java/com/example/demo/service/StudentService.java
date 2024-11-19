@@ -16,7 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+/** In this class, which is represented as a service, CRUD (Create, Read, Update & Delete) operations are defined,
+ *  which will allow us to manage the users in the interaction with the database & the endpoints that will connect to the frontend.*/
+@Service // Indicate that this class is a Service
 public class StudentService implements UserDetailsService {
 
     @Autowired

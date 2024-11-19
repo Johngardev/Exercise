@@ -18,17 +18,22 @@ import java.awt.*;
 import java.util.List;
 import java.util.logging.Logger;
 
-@CrossOrigin(origins = "*")
-@RestController
-@RequestMapping("/api")
+/**We define the endpoints for the http requests that will come from the frontend for each of the CRUD operations.*/
+
+@CrossOrigin(origins = "*") // Allow cross-origin requests for all origins
+@RestController // Indicate that this class is a REST controller
+@RequestMapping("/api") // Base URL for authentication-related endpoints
 @AllArgsConstructor
 public class StudentController {
 
-    //private static Logger logger = (Logger) LoggerFactory.getLogger(StudentController.class);
-
     @Autowired
-    private final StudentService studentService;
+    private final StudentService studentService; // Handles user service CRUD
 
+    /**
+     * Add user and return a succesful http response
+     *
+     * @param student (user) The user object containing atributtes of user in the platform
+     * @return A Response Http containing user object and Http response or an error message*/
     @SneakyThrows
     @PostMapping(path="/add")
     public @ResponseBody
@@ -36,6 +41,10 @@ public class StudentController {
         return studentService.save(student,response);
     }
 
+    /**
+     * Find all users and return a succesful http response
+     *
+     * @return A Response Http containing list of users load in database and Http response or an error message*/
     @GetMapping(path ="/findAllStudents",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Student> getAllStudents(HttpServletResponse response){
         return studentService.getAllStudents();

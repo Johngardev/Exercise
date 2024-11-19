@@ -1,25 +1,37 @@
 package com.example.demo.security.services;
 
-import com.example.demo.model.Student;
-import com.example.demo.repository.StudentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import com.example.demo.model.Student; // Import User model
+import com.example.demo.repository.StudentRepository; // Import UserRepository for user database operations
+import org.springframework.beans.factory.annotation.Autowired; // Import for dependency injection
+import org.springframework.security.core.userdetails.UserDetails; // Import UserDetails interface
+import org.springframework.security.core.userdetails.UserDetailsService; // Import UserDetailsService interface
+import org.springframework.security.core.userdetails.UsernameNotFoundException; // Import for handling user not found
+import org.springframework.stereotype.Service; // Import for service annotation
+import org.springframework.transaction.annotation.Transactional; // Import for transaction management
 
-@Service
+/**
+ * Implementation of UserDetailsService to load user-specific data.
+ */
+@Service // Indicates that this class is a service component
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     StudentRepository studentRepository;
 
+    /**
+     * Loads user details by username.
+     *
+     * @param username The username of the user.
+     * @return UserDetails containing user information.
+     * @throws UsernameNotFoundException if the user is not found.
+     */
     @Override
-    @Transactional
+    @Transactional // Ensures that the method is transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // Attempt to find the user by username
         Student user = studentRepository.findByName(username).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
+        // Return UserDetails implementation for the found user
         return UserDetailsImpl.build(user);
     }
 }
