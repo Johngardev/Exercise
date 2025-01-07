@@ -1,20 +1,36 @@
 package com.example.demo.model;
 
-import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Document(collection = "exams")
 public class Exam {
+    @Id
     private String id;
-    public String examName;
-    public String instructions;
-    public List<QuestionType> questions;
 
-    public Exam(String id, String examName, String instructions, List<QuestionType> questions) {
-        this.id = id;
-        this.examName = examName;
-        this.instructions = instructions;
-        this.questions = questions;
-    }
+    @Indexed(unique = true)
+    @JsonProperty("examName")
+    @NonNull
+    public String examName;
+
+    @JsonProperty("instructions")
+    @NonNull
+    public String instructions;
+
+    @JsonProperty("questions")
+    @NonNull
+    public List<QuestionType> questions;
 
     public String getId() {
         return id;
