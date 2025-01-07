@@ -1,14 +1,15 @@
 package com.example.demo.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Exam {
     private String id;
     public String examName;
     public String instructions;
-    public ArrayList questions;
+    public List<QuestionType> questions;
 
-    public Exam(String id, String examName, String instructions, ArrayList questions) {
+    public Exam(String id, String examName, String instructions, List<QuestionType> questions) {
         this.id = id;
         this.examName = examName;
         this.instructions = instructions;
@@ -39,11 +40,11 @@ public class Exam {
         this.examName = examName;
     }
 
-    public ArrayList getQuestions() {
+    public List<QuestionType> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(ArrayList questions) {
+    public void setQuestions(List<QuestionType> questions) {
         this.questions = questions;
     }
 }
