@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; // Impo
 import org.springframework.security.crypto.password.PasswordEncoder; // Import for password encoder interface
 import org.springframework.security.web.SecurityFilterChain; // Import for security filter chain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter; // Import for username/password authentication filter
+import org.springframework.stereotype.Service;
 
 /**
  * Security configuration class to set up Spring Security.
@@ -102,6 +103,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/api/test/**").permitAll()
                         //Allow access to manage exams
                         .requestMatchers("/apiExam/**").permitAll()
+                        //Allow send email
+                        .requestMatchers("/v1/**").permitAll()
                         // Allow public access to test endpoints
                         .anyRequest().authenticated());
         // Require authentication for any other request

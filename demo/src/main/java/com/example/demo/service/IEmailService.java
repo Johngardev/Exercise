@@ -1,9 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.model.EmailDTO;
-import jakarta.mail.MessagingException;
+import java.io.File;
 
 public interface IEmailService {
 
-  public void senMail(EmailDTO emailDTO) throws MessagingException;
+  void sendEmail(String[] toUser, String subject, String message);
+
+  void sendEmailFile(String[] toUser, String subject, String message, File file);
 }
