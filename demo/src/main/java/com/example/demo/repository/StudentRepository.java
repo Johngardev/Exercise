@@ -57,4 +57,12 @@ public interface StudentRepository  extends MongoRepository<Student,UUID> {
      */
     boolean existsByEmail(String email);
 
+    /**
+     * Check if any students already exists by id in the database.
+     *
+     * @param ids the id to check.
+     * @return A List of ids of users with role student that exists en database.
+     */
+    List<Student> findByIdIn(List<String> ids);
+
 }

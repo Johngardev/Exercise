@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Exam;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -14,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 
 @Service
 public class EmailService implements IEmailService {
+  private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
 
   @Value("${email.sender}")
   private String emailSender;

@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
 
 /**We define the endpoints for the http requests that will come from the frontend for each of the CRUD operations.*/
 
-@CrossOrigin(origins = "*") // Allow cross-origin requests for all origins
+@CrossOrigin(origins = "*", maxAge = 3600) // Allow cross-origin requests for all origins
 @RestController // Indicate that this class is a REST controller
 @RequestMapping("/api") // Base URL for authentication-related endpoints
 @AllArgsConstructor
@@ -46,6 +47,7 @@ public class StudentController {
      *
      * @return A Response Http containing list of users load in database and Http response or an error message*/
     @GetMapping(path ="/findAllStudents",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Student> getAllStudents(HttpServletResponse response){
         return studentService.getAllStudents();
     }

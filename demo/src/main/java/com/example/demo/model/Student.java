@@ -76,8 +76,7 @@ public class Student implements UserDetails {
 
     public void setName(@NonNull String name) { this.name = name; }
 
-
-    public @NonNull String getEmail() { return email; }
+    public String getEmail() { return email; }
 
     public void setEmail(@NonNull String email) { this.email = email; }
 
@@ -98,5 +97,6 @@ public class Student implements UserDetails {
     public Set<Role> getRoles() { return roles; }
 
     public void setRoles(Set<Role> roles) { this.roles = roles; }
+
 
 }
