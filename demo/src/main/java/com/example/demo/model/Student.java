@@ -51,13 +51,23 @@ public class Student implements UserDetails {
     @Transient
     private int age;
 
+    @JsonProperty("exams")
+    private List<String> examsId;
+
     public Student(String username, String email, String encode) {
         this.name = username;
         this.email = email;
         this.password = encode;
     }
 
-    /** calculate age of user as of date of birthday */
+  public Student(String id, @NonNull String name, @NonNull String email, List<String> examsId) {
+    this.id = id;
+    this.name = name;
+    this.email = email;
+    this.examsId = examsId;
+  }
+
+  /** calculate age of user as of date of birthday */
     public int getAge() {
         return Period.between(this.dob, LocalDate.now()).getYears();
     }
@@ -72,7 +82,15 @@ public class Student implements UserDetails {
         this.password = password;
     }
 
-    public @NonNull String getName() { return name; }
+  public List<String> getExamsId() {
+    return examsId;
+  }
+
+  public void setExamsId(List<String> examsId) {
+    this.examsId = examsId;
+  }
+
+  public @NonNull String getName() { return name; }
 
     public void setName(@NonNull String name) { this.name = name; }
 
