@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 
 @CrossOrigin(origins = "*", maxAge = 3600) // Allow cross-origin requests for all origins
 @RestController // Indicate that this class is a REST controller
-@RequestMapping("/api") // Base URL for authentication-related endpoints
+@RequestMapping("/api/users") // Base URL for authentication-related endpoints
 @AllArgsConstructor
 public class StudentController {
 
