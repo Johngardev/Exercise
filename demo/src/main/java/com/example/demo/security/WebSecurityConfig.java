@@ -103,8 +103,8 @@ public class WebSecurityConfig {
                     .requestMatchers("/api/test/**").permitAll()
                     //Allow access to manage exams
                     .requestMatchers("/apiExam/**").permitAll()
-                    //Allow asign exam to student
-                    .requestMatchers("/api/users/{studentId}/exams").permitAll()
+                    //Allow access to manage users
+                    .requestMatchers("/apiUsers/**").permitAll()
                     //Allow send email
                     .requestMatchers("/v1/**").permitAll()
                     // Allow public access to test endpoints

@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 
 @CrossOrigin(origins = "*", maxAge = 3600) // Allow cross-origin requests for all origins
 @RestController // Indicate that this class is a REST controller
-@RequestMapping("/api/users") // Base URL for authentication-related endpoints
+@RequestMapping("/apiUsers") // Base URL for authentication-related endpoints
 @AllArgsConstructor
 public class StudentController {
 
@@ -37,6 +37,7 @@ public class StudentController {
      * @return A Response Http containing user object and Http response or an error message*/
     @SneakyThrows
     @PostMapping(path="/add")
+    @PreAuthorize("hasRole('ADMIN')")
     public @ResponseBody
     String addStudent(@RequestBody Student student, HttpServletResponse response) throws JsonProcessingException {
         return studentService.save(student,response);
@@ -54,6 +55,7 @@ public class StudentController {
 
     @SneakyThrows
     @PutMapping(path = "/students/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String updateStudent(@PathVariable("id") ObjectId id,
                                 @RequestBody Student student, HttpServletResponse response) throws JsonProcessingException {
         return studentService.updateStudent(id, student, response);
@@ -61,6 +63,7 @@ public class StudentController {
 
     @SneakyThrows
     @DeleteMapping(path = "/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String deleteStudent(@PathVariable ObjectId id, HttpServletResponse response) {
         return studentService.deleteById(id, response);
     }

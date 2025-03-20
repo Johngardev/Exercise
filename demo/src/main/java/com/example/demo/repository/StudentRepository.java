@@ -65,4 +65,6 @@ public interface StudentRepository  extends MongoRepository<Student,UUID> {
      */
     List<Student> findByIdIn(List<String> ids);
 
+    List<Student> fetchAllStudents();
+
 }

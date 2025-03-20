@@ -42,7 +42,7 @@ public class StudentService implements UserDetailsService {
     }
 
     public List<Student> getAllStudents(){
-        return studentRepository.findAll();
+        return studentRepository.fetchAllStudents();
     }
 
     @Transactional
